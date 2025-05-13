@@ -14,9 +14,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    container:
-      image: docker://openwrt/imagebuilder
-      options: --user root
+    #container:
+      #image: docker://openwrt/imagebuilder
+      #options: --user root
       #env:
       #  GITHUB_WORKSPACE: /workdir
 
@@ -29,7 +29,10 @@ jobs:
 
     - name: calculate short sha
       id: short_sha
-      run: echo "short_sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+      run: |
+        echo "short_sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+        echo "$GITHUB_OUTPUTS"
+        echo "$short_sha"
 
     - name: Update feeds
       run: |
