@@ -29,9 +29,10 @@ jobs:
 
     - name: calculate short sha
       id: short_sha
-      run: |
-        echo "short_sha=${GITHUB_SHA:0:7}" >> "$GITHUB_OUTPUT"
-        echo "$GITHUB_OUTPUT"
+      run: echo "short_sha=${GITHUB_SHA:0:7}" >> "$GITHUB_OUTPUT"
+      
+    - name: Check outputs
+      run: echo ${{ steps.short_sha.outputs.sha_short }}
 
     - name: Update feeds
       run: |
