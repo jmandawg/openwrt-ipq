@@ -14,9 +14,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    #container:
-      #image: docker://openwrt/imagebuilder
-      #options: --user root
+    container:
+      image: docker://openwrt/imagebuilder
+      options: --user root
       #env:
       #  GITHUB_WORKSPACE: /workdir
 
@@ -26,15 +26,11 @@ jobs:
         repository: 'qosmio/openwrt-ipq'
         ref: '24.10-nss'
 
-
     - name: calculate short sha
       id: short_sha
       run: |
         echo "$(git rev-parse --short HEAD)"
-        echo "short_sha==$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
-      
-    - name: Check outputs
-      run: echo ${{ steps.short_sha.outputs.short_sha }}
+        echo "short_sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
 
     - name: Update feeds
       run: |
