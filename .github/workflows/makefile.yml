@@ -30,9 +30,8 @@ jobs:
     - name: calculate short sha
       id: short_sha
       run: |
-        echo "short_sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
-        echo "$GITHUB_OUTPUTS"
-        echo "$short_sha"
+        echo "short_sha=${GITHUB_SHA:0:7}" >> "$GITHUB_OUTPUT"
+        echo "$GITHUB_OUTPUT"
 
     - name: Update feeds
       run: |
