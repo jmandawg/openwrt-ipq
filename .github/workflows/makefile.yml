@@ -29,6 +29,7 @@ jobs:
     - name: calculate short sha
       id: short_sha
       run: |
+        git config --global --add safe.directory $GITHUB_WORKSPACE
         echo "$(git rev-parse --short HEAD)"
         echo "short_sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
 
