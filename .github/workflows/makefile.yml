@@ -34,7 +34,7 @@ jobs:
         echo "short_sha==$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
       
     - name: Check outputs
-      run: echo ${{ steps.short_sha.outputs.sha_short }}
+      run: echo ${{ steps.short_sha.outputs.short_sha }}
 
     - name: Update feeds
       run: |
