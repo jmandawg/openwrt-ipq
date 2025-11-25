@@ -13,8 +13,10 @@ make defconfig V=s
 sed -i 's/^CONFIG_FEED_luci_extra=.*/# CONFIG_FEED_luci_extra is not set/' .config
 sed -i 's/^CONFIG_FEED_qosmio=.*/# CONFIG_FEED_qosmio is not set/' .config
 
-make download -j$(nproc)
+make package/qca-mcs/{clean,prepare,compile} V=s
+
+#make download -j$(nproc)
 #make download -j1 V=s
 
 #make -j$(nproc) V=s
-make -j$(nproc)
+#make -j$(nproc)
