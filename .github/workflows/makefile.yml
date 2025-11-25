@@ -16,8 +16,8 @@ jobs:
 
     runs-on: ubuntu-latest
     container:
-      image: docker://openwrt/imagebuilder
-      options: --user root
+      #image: docker://openwrt/imagebuilder
+      #options: --user root
       #env:
       #  GITHUB_WORKSPACE: /workdir
 
@@ -33,6 +33,13 @@ jobs:
         git config --global --add safe.directory $GITHUB_WORKSPACE
         echo "$(git rev-parse --short HEAD~)"
         echo "short_sha=$(git rev-parse --short HEAD~)" >> "$GITHUB_OUTPUT"
+
+    - name: fix perms
+      run: chown -R 1000:1000 .
+
+    - name: Johns build
+      uses: docker://openwrt/imagebuilder
+      entrypoint: ./johnbuilder.sh
 
     - name: Update feeds
       run: |
