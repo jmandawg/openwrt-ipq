@@ -14,6 +14,7 @@ sed -i 's/^CONFIG_FEED_luci_extra=.*/# CONFIG_FEED_luci_extra is not set/' .conf
 sed -i 's/^CONFIG_FEED_qosmio=.*/# CONFIG_FEED_qosmio is not set/' .config
 umask
 umask 022
+zstd --version
 make package/qca-mcs/{clean,prepare,compile} V=s
 
 #make download -j$(nproc)
