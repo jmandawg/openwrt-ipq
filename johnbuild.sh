@@ -15,6 +15,8 @@ sed -i 's/^CONFIG_FEED_qosmio=.*/# CONFIG_FEED_qosmio is not set/' .config
 umask
 umask 022
 zstd --version
+ls -al staging_dir/host/bin/
+echo $PATH
 make package/qca-mcs/{clean,prepare,compile} V=s
 
 #make download -j$(nproc)
