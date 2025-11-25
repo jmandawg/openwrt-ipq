@@ -39,7 +39,8 @@ jobs:
 
     - name: Johns build
       uses: docker://openwrt/imagebuilder
-      entrypoint: ./johnbuilder.sh
+      with:
+        entrypoint: ./johnbuilder.sh
 
     - name: Update feeds
       run: |
