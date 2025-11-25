@@ -44,44 +44,12 @@ jobs:
         entrypoint: ./johnbuild.sh
         options: --ulimit nofile=1024:262144
 
-    - name: Upload build artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: my-app-artifact
-        path: dl/
+   # - name: Upload build artifact
+   #   uses: actions/upload-artifact@v4
+   #   with:
+   #     name: my-app-artifact
+   #     path: dl/
 
-    - name: Update feeds
-      run: |
-        pwd
-        cp feeds.conf.default feeds.conf
-        echo "src-git qosmio https://github.com/qosmio/packages-extra" >> feeds.conf
-        ./scripts/feeds update -a
-        ./scripts/feeds install -a
-
-    - name: Make config
-      run: |
-        cp nss-setup/config-nss.seed .config
-        echo 'CONFIG_TARGET_qualcommax_ipq807x_DEVICE_linksys_mx4300=y' >> .config
-        echo 'CONFIG_PACKAGE_luci-mod-status-nss=y' >> .config
-        make defconfig
-        sed -i 's/^CONFIG_FEED_luci_extra=.*/# CONFIG_FEED_luci_extra is not set/' .config
-        sed -i 's/^CONFIG_FEED_qosmio=.*/# CONFIG_FEED_qosmio is not set/' .config
-    
-    - name: download dependencies
-      run: |
-        umask
-        umask 022
-        #patch -d feeds/nss_packages -p1 < SKIP_HASH_PATCH
-        make download -j1 V=s
-        #make download -j$(nproc)
-      
-    - name: build
-      run: |
-        echo "force unsafe configure ${FORCE_UNSAFE_CONFIGURE}"
-        #make -j$(nproc)
-        make -j1 V=s
-      env:
-        FORCE_UNSAFE_CONFIGURE: 1
     
     #- name: zip
     #  run:  tar cvzf dist.tar.gz bin/targets/qualcommax/ipq807x
