@@ -17,6 +17,8 @@ umask 022
 zstd --version
 ls -al staging_dir/host/bin/
 echo $PATH
+make tools/zstd/compile
+ls -al staging_dir/host/bin/
 make package/qca-mcs/{clean,prepare,compile} V=s
 
 #make download -j$(nproc)
