@@ -1,0 +1,148 @@
+diff --git a/firmware/nss-firmware/Makefile b/firmware/nss-firmware/Makefile
+index 860ecac..2e96d38 100644
+--- a/firmware/nss-firmware/Makefile
++++ b/firmware/nss-firmware/Makefile
+@@ -10,7 +10,7 @@ include $(TOPDIR)/rules.mk
+ PKG_NAME:=nss-firmware
+ PKG_SOURCE_DATE:=2025-05-01
+ PKG_SOURCE_VERSION:=e4726900138b3e77fbbeaa32e58aa40a66d6b01a
+-PKG_MIRROR_HASH:=3ec87f221e8905d4b6b8b3d207b7f7c4666c3bc8db7c1f06d4ae2e78f863b8f4
++PKG_MIRROR_HASH:=skip
+ PKG_RELEASE:=1
+ 
+ PKG_SOURCE_PROTO:=git
+diff --git a/nss-userspace-oss/Makefile b/nss-userspace-oss/Makefile
+index b61ef65..bb48f30 100644
+--- a/nss-userspace-oss/Makefile
++++ b/nss-userspace-oss/Makefile
+@@ -7,7 +7,7 @@ PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/nss-userspace.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_DATE:=2024-11-27
+ PKG_SOURCE_VERSION:=7233e22
+-PKG_MIRROR_HASH:=03dea072feb18916f32798f7bfd8c8811733e0681c4e9e1d77dd895f121de734
++PKG_MIRROR_HASH:=skip
+ QSDK_VERSION:=13.0
+ PKG_VERSION:=$(QSDK_VERSION).$(subst -,.,$(PKG_SOURCE_DATE))~$(PKG_SOURCE_VERSION)
+ 
+diff --git a/qca-mcs/Makefile b/qca-mcs/Makefile
+index 6c4a2b0..2b3d498 100644
+--- a/qca-mcs/Makefile
++++ b/qca-mcs/Makefile
+@@ -7,7 +7,7 @@ PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/lklm/qca-mcs.git
+ PKG_SOURCE_DATE:=2024-09-04
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_VERSION:=e1c59f7
+-PKG_MIRROR_HASH:=a88bc7747f5564acc574f252b63fdf0b401254bf6584e0cbbac44e171dcddcb6
++PKG_MIRROR_HASH:=skip
+ QSDK_VERSION:=12.5
+ PKG_VERSION:=$(QSDK_VERSION).$(subst -,.,$(PKG_SOURCE_DATE))~$(PKG_SOURCE_VERSION)
+ 
+diff --git a/qca-nss-cfi/Makefile b/qca-nss-cfi/Makefile
+index effecf9..b05b94d 100644
+--- a/qca-nss-cfi/Makefile
++++ b/qca-nss-cfi/Makefile
+@@ -7,7 +7,7 @@ PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/lklm/nss-cfi.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_DATE:=2025-04-04
+ PKG_SOURCE_VERSION:=ff11dae
+-PKG_MIRROR_HASH:=050a9c7f4177099bd60168b68ddc9eff5d62b62992858c89d514b428da93cba2
++PKG_MIRROR_HASH:=skip
+ QSDK_VERSION:=12.5
+ PKG_VERSION:=$(QSDK_VERSION).$(subst -,.,$(PKG_SOURCE_DATE))~$(PKG_SOURCE_VERSION)
+ 
+diff --git a/qca-nss-clients/Makefile b/qca-nss-clients/Makefile
+index f172027..d96ddfc 100644
+--- a/qca-nss-clients/Makefile
++++ b/qca-nss-clients/Makefile
+@@ -7,7 +7,7 @@ PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/lklm/nss-clients.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_DATE:=2024-09-11
+ PKG_SOURCE_VERSION:=51be82d
+-PKG_MIRROR_HASH:=876c3898cb4723fccd4a1c870324724dd7c4061ac89ec88db2226fd749c18b38
++PKG_MIRROR_HASH:=skip
+ QSDK_VERSION:=12.5
+ PKG_VERSION:=$(QSDK_VERSION).$(subst -,.,$(PKG_SOURCE_DATE))~$(PKG_SOURCE_VERSION)
+ 
+@@ -54,7 +54,7 @@ PKG_CONFIG_DEPENDS:=\
+ ifeq ($(CONFIG_NSS_FIRMWARE_VERSION_11_4),y)
+ PKG_SOURCE_DATE:=2021-08-17
+ PKG_SOURCE_VERSION:=c4049d1
+-PKG_MIRROR_HASH:=5346ff2a8a89f6d671543f22e13594343b27bf81e709f07af46ade03a7614900
++PKG_MIRROR_HASH:=skip
+ PATCH_DIR:=$(CURDIR)/patches-11.4
+ QSDK_VERSION:=11.4.0.5
+ PKG_VERSION:=$(QSDK_VERSION).$(subst -,.,$(PKG_SOURCE_DATE))~$(PKG_SOURCE_VERSION)
+diff --git a/qca-nss-crypto/Makefile b/qca-nss-crypto/Makefile
+index f883934..615958e 100644
+--- a/qca-nss-crypto/Makefile
++++ b/qca-nss-crypto/Makefile
+@@ -7,7 +7,7 @@ PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/lklm/nss-crypto.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_DATE:=2024-09-16
+ PKG_SOURCE_VERSION:=60e27b9
+-PKG_MIRROR_HASH:=f4d992ccfccdbd14463872afac44ab7d44cfae683a8e9768cee27948b62fd62d
++PKG_MIRROR_HASH:=skip
+ QSDK_VERSION:=12.5
+ PKG_VERSION:=$(QSDK_VERSION).$(subst -,.,$(PKG_SOURCE_DATE))~$(PKG_SOURCE_VERSION)
+ 
+diff --git a/qca-nss-drv/Makefile b/qca-nss-drv/Makefile
+index 29a87fd..a16bcae 100644
+--- a/qca-nss-drv/Makefile
++++ b/qca-nss-drv/Makefile
+@@ -7,7 +7,7 @@ PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/lklm/nss-drv.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_DATE:=2024-11-13
+ PKG_SOURCE_VERSION:=d5ee67b
+-PKG_MIRROR_HASH:=4969320b2315eb07aefec4e189973800dd909c487794cc8383417fd2f97e689f
++PKG_MIRROR_HASH:=skip
+ QSDK_VERSION:=12.5
+ PKG_VERSION:=$(QSDK_VERSION).$(subst -,.,$(PKG_SOURCE_DATE))~$(PKG_SOURCE_VERSION)
+ 
+@@ -64,7 +64,7 @@ PKG_CONFIG_DEPENDS:= \
+ ifeq ($(CONFIG_NSS_FIRMWARE_VERSION_11_4),y)
+ PKG_SOURCE_DATE:=2021-09-13
+ PKG_SOURCE_VERSION:=53e5863
+-PKG_MIRROR_HASH:=f13681c4aadde3aa713e4ae1426d22f19a387a729521aa1e19ba9d690c17b8e3
++PKG_MIRROR_HASH:=skip
+ PATCH_DIR:=$(CURDIR)/patches-11.4
+ QSDK_VERSION:=11.4.0.5
+ PKG_VERSION:=$(QSDK_VERSION).$(subst -,.,$(PKG_SOURCE_DATE))~$(PKG_SOURCE_VERSION)
+diff --git a/qca-nss-ecm/Makefile b/qca-nss-ecm/Makefile
+index d7cba36..a6c0b6d 100644
+--- a/qca-nss-ecm/Makefile
++++ b/qca-nss-ecm/Makefile
+@@ -7,7 +7,7 @@ PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/lklm/qca-nss-ecm.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_DATE:=2024-11-06
+ PKG_SOURCE_VERSION:=30fbfa4
+-PKG_MIRROR_HASH:=a6b508a41ae79cb579e83ea1d1f5a158c7758ab45f1d26a698677a5ec61ca03d
++PKG_MIRROR_HASH:=skip
+ QSDK_VERSION:=12.5
+ PKG_VERSION:=$(QSDK_VERSION).$(subst -,.,$(PKG_SOURCE_DATE))~$(PKG_SOURCE_VERSION)
+ 
+diff --git a/qca-nss-macsec/Makefile b/qca-nss-macsec/Makefile
+index 9a317e0..9105342 100644
+--- a/qca-nss-macsec/Makefile
++++ b/qca-nss-macsec/Makefile
+@@ -6,7 +6,7 @@ PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/lklm/nss-macsec
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_DATE:=2023-10-16
+ PKG_SOURCE_VERSION:=b94e22d
+-PKG_MIRROR_HASH:=083dba530091b0a6000c7889f123e477c84789bca647bf6eb03b688bff0882b8
++PKG_MIRROR_HASH:=skip
+ QSDK_VERSION:=12.4.5
+ PKG_VERSION:=$(QSDK_VERSION).$(subst -,.,$(PKG_SOURCE_DATE))~$(PKG_SOURCE_VERSION)
+ 
+diff --git a/qca-ssdk-shell/Makefile b/qca-ssdk-shell/Makefile
+index 38a54b5..5d545e6 100644
+--- a/qca-ssdk-shell/Makefile
++++ b/qca-ssdk-shell/Makefile
+@@ -7,7 +7,7 @@ PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/ssdk-shell.git
+ PKG_SOURCE_PROTO:=git
+ PKG_SOURCE_DATE:=2024-12-17
+ PKG_SOURCE_VERSION:=a2b7be2
+-PKG_MIRROR_HASH:=7f546cc9db6627ee8c06db47c957c6a4452e72194b7af355e7f4e164d0848295
++PKG_MIRROR_HASH:=skip
+ QSDK_VERSION:=12.5
+ PKG_VERSION:=$(QSDK_VERSION).$(subst -,.,$(PKG_SOURCE_DATE))~$(PKG_SOURCE_VERSION)
+ 
