@@ -39,8 +39,15 @@ jobs:
 
     - name: Johns build
       uses: docker://openwrt/imagebuilder
+      continue-on-error: true
       with:
         entrypoint: ./johnbuild.sh
+
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: my-app-artifact
+        path: dl/
 
     - name: Update feeds
       run: |
