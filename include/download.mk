@@ -240,7 +240,7 @@ define DownloadMethod/rawgit
 	(cd $(SUBDIR) && git checkout $(SOURCE_VERSION)) && \
 	export TAR_TIMESTAMP=`cd $(SUBDIR) && git log -1 --no-show-signature --format='@%ct'` && \
 	echo "Generating formal git archive (apply .gitattributes rules)" && \
-	(cd $(SUBDIR) && git config core.abbrev 8 && \
+	(zstd --version && cd $(SUBDIR) && git config core.abbrev 8 && \
 	git archive --format=tar HEAD --output=../$(SUBDIR).tar.git) && \
 	$(if $(filter skip,$(SUBMODULES)),true, \
 		$(TAR) --numeric-owner --owner=0 --group=0 --ignore-failed-read -C $(SUBDIR) -f $(SUBDIR).tar.git -r .git .gitmodules 2>/dev/null \
