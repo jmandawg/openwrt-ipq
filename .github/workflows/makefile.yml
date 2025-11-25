@@ -42,6 +42,7 @@ jobs:
       continue-on-error: true
       with:
         entrypoint: ./johnbuild.sh
+        options: --ulimit nofile=1024:262144
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v4
