@@ -35,7 +35,7 @@ jobs:
         echo "short_sha=$(git rev-parse --short HEAD~)" >> "$GITHUB_OUTPUT"
 
     - name: fix perms
-      run: chown -R 1000:1000 .
+      run: sudo chown -R 1000:1000 .
 
     - name: Johns build
       uses: docker://openwrt/imagebuilder
