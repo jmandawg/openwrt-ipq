@@ -12,7 +12,8 @@ echo 'CONFIG_PACKAGE_luci-mod-status-nss=y' >> .config
 make defconfig V=s
 sed -i 's/^CONFIG_FEED_luci_extra=.*/# CONFIG_FEED_luci_extra is not set/' .config
 sed -i 's/^CONFIG_FEED_qosmio=.*/# CONFIG_FEED_qosmio is not set/' .config
-
+umask
+umask 022
 make package/qca-mcs/{clean,prepare,compile} V=s
 
 #make download -j$(nproc)
