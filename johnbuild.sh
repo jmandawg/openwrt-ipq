@@ -28,5 +28,5 @@ patch -d feeds/nss_packages -p1 < SKIP_HASH_PATCH
 make download -j$(nproc)
 #make download -j1 V=s
 
-make -j1 V=s
-#make -j$(nproc)
+#make -j1 V=s
+make -j$(nproc)

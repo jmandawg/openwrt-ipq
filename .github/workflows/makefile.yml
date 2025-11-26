@@ -16,7 +16,8 @@ jobs:
 
     runs-on: ubuntu-latest
     container:
-      #image: docker://openwrt/imagebuilder
+      image: openwrt/imagebuilder
+      options: --ulimit nofile=1024:262144
       #options: --user root
       #env:
       #  GITHUB_WORKSPACE: /workdir
@@ -36,7 +37,14 @@ jobs:
         echo "short_sha=$(git rev-parse --short HEAD~)" >> "$GITHUB_OUTPUT"
 
     - name: fix perms
-      run: sudo chown -R 1000:1000 .
+      run: |
+        df -h
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /opt/ghc
+        sudo rm -rf "/usr/local/share/boost"
+        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+        df -h
+        sudo chown -R 1000:1000 .
 
     - name: Johns build
       uses: docker://openwrt/imagebuilder
