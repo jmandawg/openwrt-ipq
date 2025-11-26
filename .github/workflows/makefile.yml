@@ -29,6 +29,13 @@ jobs:
         ref: 'main-nss'
         fetch-depth: '2'
 
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: true
+
     - name: calculate short sha
       id: short_sha
       run: |
@@ -38,13 +45,13 @@ jobs:
 
     - name: fix perms
       run: |
+        sudo chown -R 1000:1000 .
         df -h
         sudo rm -rf /usr/share/dotnet
         sudo rm -rf /opt/ghc
         sudo rm -rf "/usr/local/share/boost"
         sudo rm -rf "$AGENT_TOOLSDIRECTORY"
         df -h
-        sudo chown -R 1000:1000 .
 
     - name: Johns build
       uses: docker://openwrt/imagebuilder
