@@ -26,6 +26,7 @@ jobs:
       with:
         #repository: 'qosmio/openwrt-ipq'
         ref: 'main-nss'
+        fetch-depth: '2'
 
     - name: calculate short sha
       id: short_sha
