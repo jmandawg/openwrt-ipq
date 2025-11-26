@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 cp feeds.conf.default feeds.conf
 echo "src-git qosmio https://github.com/qosmio/packages-extra" >> feeds.conf
@@ -18,12 +19,14 @@ zstd --version
 ls -al staging_dir/host/bin/
 echo $PATH
 #make tools/zstd/compile
-make tools/compile
+#make tools/compile
 ls -al staging_dir/host/bin/
 #make package/qca-mcs/{clean,prepare,compile} V=s
 
-#make download -j$(nproc)
-make download -j1 V=s
+patch -d feeds/nss_packages -p1 < SKIP_HASH_PATCH
 
-#make -j$(nproc) V=s
-make -j$(nproc)
+make download -j$(nproc)
+#make download -j1 V=s
+
+make -j1 V=s
+#make -j$(nproc)
