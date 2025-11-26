@@ -40,7 +40,7 @@ jobs:
 
     - name: Johns build
       uses: docker://openwrt/imagebuilder
-      continue-on-error: true
+      #continue-on-error: true
       with:
         entrypoint: ./johnbuild.sh
         options: --ulimit nofile=1024:262144
