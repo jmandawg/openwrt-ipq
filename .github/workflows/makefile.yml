@@ -1,0 +1,131 @@
+name: Makefile CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main-nss" ]
+#  pull_request:
+#    branches: [ "24.10-nss" ]
+#defaults:
+#  run:
+#    working-directory: /workdir
+
+jobs:
+        
+  build:
+
+    runs-on: ubuntu-latest
+    #container:
+      #image: openwrt/imagebuilder
+      #options: --ulimit nofile=1024:262144
+      #options: --user root
+      #env:
+      #  GITHUB_WORKSPACE: /workdir
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        #repository: 'qosmio/openwrt-ipq'
+        ref: 'main-nss'
+        fetch-depth: '2'
+
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: true
+
+    - name: calculate short sha
+      id: short_sha
+      run: |
+        git config --global --add safe.directory $GITHUB_WORKSPACE
+        echo "$(git rev-parse --short HEAD~)"
+        echo "short_sha=$(git rev-parse --short HEAD~)" >> "$GITHUB_OUTPUT"
+
+    - name: fix perms
+      run: |
+        sudo chown -R 1000:1000 .
+
+    - name: Johns build
+      uses: docker://openwrt/imagebuilder
+      #continue-on-error: true
+      with:
+        entrypoint: ./johnbuild.sh
+        options: --ulimit nofile=1024:262144
+
+   # - name: Upload build artifact
+   #   uses: actions/upload-artifact@v4
+   #   with:
+   #     name: my-app-artifact
+   #     path: dl/
+
+    
+    #- name: zip
+    #  run:  tar cvzf dist.tar.gz bin/targets/qualcommax/ipq807x
+
+    #- name: Archive production artifacts
+    #  uses: actions/upload-artifact@v4
+    #  with:
+    #    name: dist-without-markdown
+    #    path: |
+    #      bin/targets/qualcommax/ipq807x/*.bin
+    #      bin/targets/qualcommax/ipq807x/*.itb
+    #      bin/targets/qualcommax/ipq807x/*.manifest
+    #      bin/targets/qualcommax/ipq807x/*.buildinfo
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref_name }}.${{ steps.short_sha.outputs.short_sha }}
+        release_name: ${{ github.ref_name }} ${{ github.event.repository.updated_at}} ${{ steps.short_sha.outputs.short_sha }}
+        draft: false
+        prerelease: false
+        
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: bin/targets/qualcommax/ipq807x/config.buildinfo
+        asset_name: config.buildinfo
+        asset_content_type: text/plain
+
+    - name: Upload Release Asset
+      id: upload-release-asset2 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-linksys_mx4300-squashfs-factory.bin
+        asset_name: openwrt-qualcommax-ipq807x-linksys_mx4300-squashfs-factory.bin
+        asset_content_type: application/octet-stream
+
+    - name: Upload Release Asset
+      id: upload-release-asset3
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-linksys_mx4300-squashfs-sysupgrade.bin
+        asset_name: openwrt-qualcommax-ipq807x-linksys_mx4300-squashfs-sysupgrade.bin
+        asset_content_type: application/octet-stream
+
+    - name: Upload Release Asset
+      id: upload-release-asset4
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: bin/targets/qualcommax/ipq807x/openwrt-qualcommax-ipq807x-linksys_mx4300-initramfs-uImage.itb
+        asset_name: openwrt-qualcommax-ipq807x-linksys_mx4300-initramfs-uImage.itb
+        asset_content_type: application/octet-stream
+    
